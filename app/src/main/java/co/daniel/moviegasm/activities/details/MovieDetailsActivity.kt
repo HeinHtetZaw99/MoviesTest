@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import co.daniel.moviegasm.R
 import co.daniel.moviegasm.addBackNavButton
 import co.daniel.moviegasm.base.BaseActivity
 import co.daniel.moviegasm.databinding.ActivityMovieDetailsBinding
 import co.daniel.moviegasm.domain.MoviesVO
-import co.daniel.moviegasm.domain.ReturnResult
 import co.daniel.moviegasm.show
 import co.daniel.moviegasm.viewmodel.MovieDetailsViewModel
 
@@ -34,18 +34,20 @@ class MovieDetailsActivity : BaseActivity<MovieDetailsViewModel>() {
         binding.toolbar.addBackNavButton(this)
 
         movieID = intent.getStringExtra(MOVIE_ID) ?: ""
-        viewModel.getMovieDetails(movieID)
 
-        viewModel.observeMovieDetails().observe(this, {
-            if (it is ReturnResult.PositiveResult)
-                setMovieDataToUI(it.data)
-            else
-                showSnackBar(binding.root, it)
+        viewModel.getMovieDetails(movieID).observe(this, {
+            setMovieDataToUI(it)
+
         })
     }
 
     private fun setMovieDataToUI(data: MoviesVO) {
-        Log.i("setMovieDataToUI","setMovieDataToUI reached showing poster and details")
+        Log.i("setMovieDataToUI", "setMovieDataToUI reached showing poster and details")
+        binding.moviePosterExtendedIv.show(data.poster)
+        binding.contentMoviesDetailsLayout.movieTitleTv.text = data.title
+        binding.contentMoviesDetailsLayout.directoryNameTv.text =
+            getString(R.string.text_directed_by, data.releaseDate)
+        binding.contentMoviesDetailsLayout.descriptionTv.text = data.overView
         binding.moviePosterExtendedIv.show(data.poster)
     }
 

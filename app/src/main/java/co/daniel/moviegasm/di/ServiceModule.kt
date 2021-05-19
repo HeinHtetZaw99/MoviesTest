@@ -1,13 +1,10 @@
 package co.daniel.moviegasm.di
 
-import androidx.annotation.NonNull
+import co.daniel.moviegasm.datasources.network.services.MoviesAPI
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Module(includes = [ServiceModule.Providers::class])
 abstract class ServiceModule {
@@ -15,11 +12,13 @@ abstract class ServiceModule {
     @Module
     object Providers {
 
-//        @JvmStatic
-//        @Provides
-//        @Named("UnauthRegisterService")
-//        fun provideUnAuthRegisterService(retrofitBuilder : Retrofit.Builder , httpClientBuilder : OkHttpClient.Builder) : RegisterService =
-//            retrofitBuilder.client(httpClientBuilder.build()).build().create(RegisterService::class.java)
+        @JvmStatic
+        @Provides
+        fun provideMoviesAPI(
+            retrofitBuilder: Retrofit.Builder,
+            httpClientBuilder: OkHttpClient.Builder
+        ): MoviesAPI =
+            retrofitBuilder.client(httpClientBuilder.build()).build().create(MoviesAPI::class.java)
 
 //        @JvmStatic
 //        @NonNull

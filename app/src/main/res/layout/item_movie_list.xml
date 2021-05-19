@@ -10,6 +10,18 @@
         android:adjustViewBounds="true"
         android:layout_height="match_parent"/>
 
+    <TextView
+        tools:text = "Test Movie Name"
+        android:layout_gravity="bottom"
+        android:textColor="@color/yellow"
+        android:layout_marginBottom="@dimen/margin_xSmall"
+        android:padding="@dimen/margin_xSmall"
+        android:id="@+id/movieRatedTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        />
+
     <FrameLayout
         android:layout_width="match_parent"
 

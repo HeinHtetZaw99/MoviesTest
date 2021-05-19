@@ -20,17 +20,6 @@ class MovieDetailsViewModel @Inject constructor(private val movieRepository: Mov
     fun observeMovieDetails() = movieDetailsDataLiveData
 
 
-    fun getMovieDetails(movieID: String) {
-        movieRepository.getMovieByID(movieID)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.d("getMovieDetails($movieID)  : $it ")
-                movieDetailsDataLiveData.postValue(ReturnResult.PositiveResult(it))
-            }, {
-                Timber.e("Error in getMovieDetails($movieID)  : $it ")
-                movieDetailsDataLiveData.postValue(it.convertToErrorResult())
-            }).addToCompositeDisposable()
-    }
+    fun getMovieDetails(movieID: String) = movieRepository.getMovieByID(movieID)
 
 }

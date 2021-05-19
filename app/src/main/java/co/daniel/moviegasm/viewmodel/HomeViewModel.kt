@@ -1,5 +1,7 @@
 package co.daniel.moviegasm.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import co.daniel.moviegasm.domain.MoviesVO
 import co.daniel.moviegasm.domain.ReturnResult
@@ -15,22 +17,38 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository) :
     BaseViewModel() {
 
+    var isMessageListAlreadyLoading: Boolean = false
+    var hasMoreToLoadMessage: Boolean = true
     private val moviesDataLiveData: MutableLiveData<ReturnResult<List<MoviesVO>>> by lazy { MutableLiveData<ReturnResult<List<MoviesVO>>>() }
 
     fun observeMovieList() = moviesDataLiveData
 
-    fun getMovieList(pageNumber: Int) {
-        movieRepository.getMoviesList(pageNumber)
+    fun getMovieListFromNetwork() {
+        isMessageListAlreadyLoading = true
+        movieRepository.getMoviesList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Timber.d("getMovieList  : $it ")
-                moviesDataLiveData.postValue(ReturnResult.PositiveResult(it))
+                Log.d("Paging","getMovieList from network : $it ")
+                hasMoreToLoadMessage = it.isNotEmpty()
+                isMessageListAlreadyLoading = false
+                val listToBeSaved = ArrayList<MoviesVO>()
+                it.forEach { entry ->
+                    if (entry != null)
+                        listToBeSaved.add(entry)
+                }
+                movieRepository.saveMovies(listToBeSaved)
+
             }, {
                 Timber.e("Error in getMovieList  : $it ")
-                moviesDataLiveData.postValue(it.convertToErrorResult())
+                isMessageListAlreadyLoading = false
+
             }).addToCompositeDisposable()
     }
 
+    fun getMoviesListFromCache(fetchFromStart: Boolean): LiveData<List<MoviesVO>> {
+        isMessageListAlreadyLoading = false
+        return movieRepository.getCachedMovies(fetchFromStart)
+    }
 
 }

@@ -1,6 +1,7 @@
 package co.daniel.moviegasm.di
 
-import co.daniel.moviegasm.activities.HomeScreenActivity
+import co.daniel.moviegasm.activities.details.MovieDetailsActivity
+import co.daniel.moviegasm.activities.home.HomeScreenActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -9,5 +10,8 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract fun homeScreenActivity() : HomeScreenActivity
+
+    @ContributesAndroidInjector
+    abstract fun movieDetailsActivity() : MovieDetailsActivity
 
 }

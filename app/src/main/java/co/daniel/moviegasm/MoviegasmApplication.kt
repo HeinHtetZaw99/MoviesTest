@@ -2,6 +2,7 @@ package co.daniel.moviegasm
 
 import android.app.Application
 import co.daniel.moviegasm.di.AppComponent
+import co.daniel.moviegasm.di.AppInjector
 import co.daniel.moviegasm.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -27,6 +28,7 @@ class MoviegasmApplication : Application(), HasAndroidInjector {
         if (applicationComponent == null) {
             applicationComponent = reinitApplicationComponent()
         }
+        AppInjector.initAutoInjection(this)
 
     }
 

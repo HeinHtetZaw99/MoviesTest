@@ -2,6 +2,7 @@ package co.daniel.moviegasm.di
 
 import androidx.lifecycle.ViewModel
 import co.daniel.moviegasm.viewmodel.HomeViewModel
+import co.daniel.moviegasm.viewmodel.MovieDetailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -16,5 +17,12 @@ abstract class ViewModelModule {
         homeScreenViewModel: HomeViewModel
     ): ViewModel
 
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailsViewModel::class)
+    abstract fun movieDetailsViewModel(
+        movieDetailsViewModel: MovieDetailsViewModel
+    ): ViewModel
 
 }

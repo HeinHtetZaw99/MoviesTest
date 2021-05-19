@@ -3,8 +3,8 @@ package co.daniel.moviegasm.di
 import android.app.Application
 import android.content.Context
 import co.daniel.moviegasm.datasources.network.exception.NetworkExceptionMessageFactory
-import co.daniel.moviegasm.datasources.network.GenericErrorMessageFactoryImpl
-import com.appbase.exception.NetworkExceptionMessageFactoryImpl
+import co.daniel.moviegasm.datasources.network.impls.GenericErrorMessageFactoryImpl
+import co.daniel.moviegasm.datasources.network.impls.NetworkExceptionMessageFactoryImpl
 
 import dagger.Binds
 import dagger.Module

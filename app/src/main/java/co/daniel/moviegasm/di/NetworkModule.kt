@@ -3,11 +3,14 @@ package co.daniel.moviegasm.di
 import android.content.Context
 import co.daniel.moviegasm.BuildConfig
 import co.daniel.moviegasm.datasources.cache.SharePrefUtils
+import co.daniel.moviegasm.datasources.network.MovieNetworkDataSource
+import co.daniel.moviegasm.datasources.network.dummy.FakeMovieNetworkDataSourceImpl
 import co.daniel.moviegasm.datasources.network.exception.NetworkExceptionInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.readystatesoftware.chuck.ChuckInterceptor
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -23,12 +26,12 @@ import javax.inject.Singleton
 @Module(includes = [NetworkModule.Providers::class, ServiceModule.Providers::class, ConstantModule::class])
 abstract class NetworkModule {
 
-/*
+
     @Binds
     abstract fun homeDataSource(
-        homeDataSourceImpl: CourseListDataSourceImpl
-    ): CourseListDataSource
-*/
+        homeDataSourceImpl: FakeMovieNetworkDataSourceImpl
+    ): MovieNetworkDataSource
+
 
     @Module
     object Providers {
@@ -43,18 +46,8 @@ abstract class NetworkModule {
                         false -> HttpLoggingInterceptor.Level.NONE
                     }
                 }
-//                val spec : ConnectionSpec = ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-//                    .tlsVersions(TlsVersion.TLS_1_2)
-//                    .cipherSuites(
-//                        CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 ,
-//                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 ,
-//                        CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
-//                    )
-//                    .build()
 
                 addInterceptor(loggerInterceptor)
-//                .connectionSpecs(Collections.singletonList(spec))
-//                    .connectionSpecs(listOf(ConnectionSpec.MODERN_TLS , ConnectionSpec.CLEARTEXT , spec))
                     .addInterceptor(ChuckInterceptor(context))
                     .addInterceptor(NetworkExceptionInterceptor())
 
@@ -117,28 +110,6 @@ abstract class NetworkModule {
 
         }
 
-        @JvmStatic
-        @Provides
-        @Named("vdo_player")
-        fun providesVdoPlayerRetrofitBuilder(gson: Gson): Retrofit.Builder {
-            return Retrofit.Builder()
-                .baseUrl("https://dev.vdocipher.com/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        }
-
-        @JvmStatic
-        @Provides
-        @Named("simple")
-        fun providesSimpleRetrofitBuilder(
-            gson: Gson,
-            @Named("base_url") baseUrl: String
-        ): Retrofit.Builder {
-            return Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        }
 
         @JvmStatic
         @Provides

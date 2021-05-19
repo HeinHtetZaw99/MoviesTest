@@ -54,5 +54,6 @@
     <dimen name="player_thumb_size_small">12dp</dimen>
 
     <dimen name="player_thumb_size_large">24dp</dimen>
+    <dimen name="app_bar_height">320dp</dimen>
 
 </resources>

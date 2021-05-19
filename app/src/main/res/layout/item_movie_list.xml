@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ImageView
+        android:id="@+id/moviePosterIv"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+
+        android:clickable="false"
+        android:background="@drawable/fg_movie_item_gradient"
+        android:layout_height="match_parent">
+        <TextView
+            tools:text = "Test Movie Name"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/margin_xSmall"
+            android:padding="@dimen/margin_xSmall"
+            android:id="@+id/movieTitleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            />
+    </FrameLayout>
+</RelativeLayout>

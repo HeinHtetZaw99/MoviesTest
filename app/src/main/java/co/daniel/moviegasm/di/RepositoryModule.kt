@@ -1,13 +1,16 @@
 package co.daniel.moviegasm.di
 
+import co.daniel.moviegasm.repositories.MovieRepository
+import co.daniel.moviegasm.repositories.impl.MovieRepositoryImpl
+import dagger.Binds
 import dagger.Module
 
 @Module(includes = [CacheModule::class, NetworkModule::class])
 abstract class RepositoryModule {
-//
-//    @Binds
-//    abstract fun getHomeRepository(
-//        homeRepositoryImpl: HomeRepositoryImpl
-//    ): HomeRepository
+
+    @Binds
+    abstract fun getMovieRepository(
+        homeRepositoryImpl: MovieRepositoryImpl
+    ): MovieRepository
 
 }

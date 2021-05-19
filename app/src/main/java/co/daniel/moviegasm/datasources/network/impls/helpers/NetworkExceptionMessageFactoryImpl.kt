@@ -1,4 +1,4 @@
-package co.daniel.moviegasm.datasources.network.impls
+package co.daniel.moviegasm.datasources.network.impls.helpers
 
 import android.content.Context
 import co.daniel.moviegasm.R

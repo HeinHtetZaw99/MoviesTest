@@ -1,10 +1,11 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import android.app.Application
 import android.content.Context
 import co.daniel.moviegasm.datasources.network.exception.NetworkExceptionMessageFactory
-import co.daniel.moviegasm.datasources.network.impls.GenericErrorMessageFactoryImpl
-import co.daniel.moviegasm.datasources.network.impls.NetworkExceptionMessageFactoryImpl
+import co.daniel.moviegasm.datasources.network.impls.helpers.GenericErrorMessageFactoryImpl
+import co.daniel.moviegasm.datasources.network.impls.helpers.NetworkExceptionMessageFactoryImpl
+import co.daniel.moviegasm.di.*
 
 import dagger.Binds
 import dagger.Module

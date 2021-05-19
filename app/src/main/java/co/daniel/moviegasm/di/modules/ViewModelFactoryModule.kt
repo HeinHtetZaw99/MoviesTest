@@ -1,4 +1,4 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import androidx.lifecycle.ViewModelProvider
 import co.daniel.moviegasm.di.DaggerViewModelFactory

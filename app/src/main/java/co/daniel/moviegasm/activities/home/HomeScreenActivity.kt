@@ -30,17 +30,6 @@ class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventL
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        /*if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            showShortToast("2")
-            binding.moviesRv.layoutManager = GridLayoutManager(this@HomeScreenActivity,2)
-        }else{
-            showShortToast("3")
-            binding.moviesRv.layoutManager = GridLayoutManager(this@HomeScreenActivity,3)
-        }*/
-    }
-
     override fun initUI() {
         with(binding.moviesRv)
         {
@@ -62,24 +51,10 @@ class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventL
                     val layoutManager = binding.moviesRv.layoutManager as? LinearLayoutManager
                     layoutManager?.let {
                         val lastVisible: Int = layoutManager.findLastVisibleItemPosition()
-                        val reachedTheEnd = lastVisible >= movieAdapter.itemCount - 2
-                        Log.i(
-                            "Paging",
-                            "lastVisible $lastVisible and movieAdapter.itemCount ${movieAdapter.itemCount} and reachedTheEnd  $reachedTheEnd"
-                        )
-                        if (reachedTheEnd) {
-
+                        if (lastVisible >= movieAdapter.itemCount - 2) {
                             if (viewModel.hasMoreToLoadMessage) {
-                                Log.i(
-                                    "Paging",
-                                    "viewModel.hasMoreToLoadMessage ${viewModel.hasMoreToLoadMessage} and viewModel.isMessageListAlreadyLoading  ${viewModel.isMessageListAlreadyLoading}"
-                                )
                                 if (!viewModel.isMessageListAlreadyLoading) {
                                     fetchMovies(false)
-                                    Log.i(
-                                        "Paging",
-                                        "fetching from cache"
-                                    )
                                 }
                             }
                         }
@@ -98,7 +73,6 @@ class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventL
             binding.swipeRefreshLayout.isRefreshing = false
             if (it.isNotEmpty()) {
                 Log.v("Paging", "fetched List = ${it.size}")
-
                 movieAdapter.appendNewData(it)
             } else if (viewModel.hasMoreToLoadMessage) {
                 Log.v("Paging", "fetching from network ...")
@@ -106,21 +80,6 @@ class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventL
             }
 
         })
-    }
-
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        // ignore orientation change
-
-        super.onConfigurationChanged(newConfig)
-
-        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            binding.moviesRv.layoutManager = GridLayoutManager(this@HomeScreenActivity, 2)
-        } else {
-            binding.moviesRv.layoutManager = GridLayoutManager(this@HomeScreenActivity, 3)
-        }
-
-
     }
 
     override fun onClickMovie(movieID: String) {

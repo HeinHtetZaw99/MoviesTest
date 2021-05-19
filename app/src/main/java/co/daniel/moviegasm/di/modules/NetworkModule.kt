@@ -1,10 +1,9 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import android.content.Context
 import co.daniel.moviegasm.BuildConfig
 import co.daniel.moviegasm.datasources.cache.SharePrefUtils
 import co.daniel.moviegasm.datasources.network.MovieNetworkDataSource
-import co.daniel.moviegasm.datasources.network.dummy.FakeMovieNetworkDataSourceImpl
 import co.daniel.moviegasm.datasources.network.exception.NetworkExceptionInterceptor
 import co.daniel.moviegasm.datasources.network.impls.MovieNetworkDataSourceImpl
 import com.google.gson.FieldNamingPolicy

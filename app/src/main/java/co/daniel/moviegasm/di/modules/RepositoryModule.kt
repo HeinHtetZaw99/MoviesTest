@@ -1,4 +1,4 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import co.daniel.moviegasm.repositories.MovieRepository
 import co.daniel.moviegasm.repositories.impl.MovieRepositoryImpl

@@ -8,7 +8,7 @@
     android:nestedScrollingEnabled="true">
     <TextView
         android:id="@+id/movieTitleTv"
-        android:text="Justice League Synder's Cut"
+        tools:text="Justice League Synder's Cut"
         android:layout_width="match_parent"
         android:textSize="18sp"
 
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/directoryNameTv"
-        android:text="Directed by :: Zack Snyder"
+        tools:text="Directed by :: Zack Snyder"
         android:layout_width="match_parent"
         android:textSize="12sp"
         android:layout_below="@id/movieTitleTv"
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:textSize="14sp"
         android:layout_below="@id/plotTitleTv"
-        android:text="@string/dummy_long_text"
+        tools:text="@string/dummy_long_text"
         android:paddingStart="@dimen/margin_xSmall"
         android:paddingEnd="@dimen/margin_xSmall"
         android:paddingTop="@dimen/margin_3xSmall"

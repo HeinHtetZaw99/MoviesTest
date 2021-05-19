@@ -10,12 +10,11 @@ import io.reactivex.Observable
  */
 interface MovieRepository {
     fun getMoviesList() : Observable<List<MoviesVO?>>
-    fun getMoviesAPIKey() : Observable<String>
+
     fun saveMovieAPIKEY( key : String ) : Completable
     fun getMovieByID(movieID: String): LiveData<MoviesVO>
 
     fun getCachedMovies(fetchFromStart : Boolean) : LiveData<List<MoviesVO>>
     fun saveMovies(dataList : List<MoviesVO>)
 
-    fun getMoviesListSource() : LiveData<List<MoviesVO>>
 }

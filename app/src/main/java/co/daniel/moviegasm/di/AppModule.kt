@@ -3,6 +3,10 @@ package co.daniel.moviegasm.di
 import android.content.Context
 import androidx.room.Room
 import co.daniel.moviegasm.datasources.cache.room.AppDatabase
+import co.daniel.moviegasm.di.modules.ActivityModule
+import co.daniel.moviegasm.di.modules.BaseAppModule
+import co.daniel.moviegasm.di.modules.ComponentModule
+import co.daniel.moviegasm.di.modules.ViewModelModule
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

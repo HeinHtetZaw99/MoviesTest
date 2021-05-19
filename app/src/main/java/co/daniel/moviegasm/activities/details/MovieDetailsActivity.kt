@@ -37,7 +37,6 @@ class MovieDetailsActivity : BaseActivity<MovieDetailsViewModel>() {
 
         viewModel.getMovieDetails(movieID).observe(this, {
             setMovieDataToUI(it)
-
         })
     }
 

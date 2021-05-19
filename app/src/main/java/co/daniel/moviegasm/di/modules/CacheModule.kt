@@ -1,4 +1,4 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 
 import co.daniel.moviegasm.datasources.MovieCacheDataSource
@@ -16,12 +16,7 @@ abstract class CacheModule {
         movieCacheDataSourceImpl: MovieCacheDataSourceImpl
     ): MovieCacheDataSource
 
-    /*
-        @Binds
-        abstract fun offlineOTPCacheSourceImpl(
-            offlineOTPCacheSourceImpl : OfflineOTPCacheSourceImpl
-        ) : OfflineOTPCacheSource
-    */
+
     @Module
     object Provider {
         @Provides

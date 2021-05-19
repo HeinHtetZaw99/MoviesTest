@@ -30,10 +30,8 @@ abstract class BaseRecyclerAdapter<itemType, viewType : BaseViewHolder<itemType>
     }
 
     fun addNewData(newItem: itemType, position: Int) {
-        if (dataList != null) {
-            dataList.add(position, newItem)
-            notifyDataSetChanged()
-        }
+        dataList.add(position, newItem)
+        notifyDataSetChanged()
     }
 
     fun update(newDataList: List<itemType>) {

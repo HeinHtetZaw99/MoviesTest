@@ -18,15 +18,11 @@ class MovieRepositoryImpl @Inject constructor(
     private val movieCacheDataSource: MovieCacheDataSource
 ) : MovieRepository {
 
-    private val mediator = MediatorLiveData<List<MoviesVO>>()
+
     private var cachePageNumber = 1
 
     override fun getMoviesList(): Observable<List<MoviesVO?>> {
         return Observable.fromCallable { movieNetworkDataSource.getMoviesList() }
-    }
-
-    override fun getMoviesAPIKey(): Observable<String> {
-        return Observable.fromCallable { movieNetworkDataSource.getTempToken() }
     }
 
     override fun saveMovieAPIKEY(key: String): Completable {
@@ -38,8 +34,8 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getCachedMovies(fetchFromStart: Boolean): LiveData<List<MoviesVO>> {
-        return movieCacheDataSource.getMoviesList(if (fetchFromStart) 1 else cachePageNumber).also{
-            if(fetchFromStart)
+        return movieCacheDataSource.getMoviesList(if (fetchFromStart) 1 else cachePageNumber).also {
+            if (fetchFromStart)
                 cachePageNumber = 1
             else
                 cachePageNumber++
@@ -50,8 +46,4 @@ class MovieRepositoryImpl @Inject constructor(
         movieCacheDataSource.saveMovies(dataList)
     }
 
-    override fun getMoviesListSource(): LiveData<List<MoviesVO>> {
-
-        return mediator
-    }
 }

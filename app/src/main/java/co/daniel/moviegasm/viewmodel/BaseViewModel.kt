@@ -18,10 +18,8 @@ abstract class BaseViewModel : ViewModel() {
         super.onCleared()
     }
 
-
     @Inject
     lateinit var genericErrorMessageFactory: GenericErrorMessageFactory
-
 
     fun Disposable.addToCompositeDisposable(): Disposable = apply { compositeDisposable.add(this) }
 

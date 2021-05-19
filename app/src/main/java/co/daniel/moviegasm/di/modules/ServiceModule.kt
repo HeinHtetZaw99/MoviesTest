@@ -1,4 +1,4 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import co.daniel.moviegasm.datasources.network.services.MoviesAPI
 import dagger.Module
@@ -19,13 +19,6 @@ abstract class ServiceModule {
             httpClientBuilder: OkHttpClient.Builder
         ): MoviesAPI =
             retrofitBuilder.client(httpClientBuilder.build()).build().create(MoviesAPI::class.java)
-
-//        @JvmStatic
-//        @NonNull
-//        @Provides
-//        fun provideLoginService(@Named("authenticatedBuilder") retrofitBuilder: Retrofit.Builder): LoginService {
-//            return retrofitBuilder.build().create(LoginService::class.java)
-//        }
 
     }
 

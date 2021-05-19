@@ -19,9 +19,6 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
 
     var isMessageListAlreadyLoading: Boolean = false
     var hasMoreToLoadMessage: Boolean = true
-    private val moviesDataLiveData: MutableLiveData<ReturnResult<List<MoviesVO>>> by lazy { MutableLiveData<ReturnResult<List<MoviesVO>>>() }
-
-    fun observeMovieList() = moviesDataLiveData
 
     fun getMovieListFromNetwork() {
         isMessageListAlreadyLoading = true

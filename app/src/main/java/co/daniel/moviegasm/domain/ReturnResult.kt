@@ -18,29 +18,29 @@ sealed class ReturnResult<out T> {
 
     fun getContent(): String {
         return when (this) {
-            is ReturnResult.PositiveResult -> {
+            is PositiveResult -> {
                 "${this.data ?: "Success"}"
             }
-            is ReturnResult.ErrorResult -> {
+            is ErrorResult -> {
                 "${this.errorMsg}"
             }
-            is ReturnResult.NetworkErrorResult -> {
+            is NetworkErrorResult -> {
                 "Network error occurred "
             }
-            is ReturnResult.EmptyResult -> {
+            is EmptyResult -> {
                 "No data to display"
             }
-            is ReturnResult.ValidationErrorResult -> {
+            is ValidationErrorResult -> {
                 "validation failed :: ${this.msg}"
             }
 
-            is ReturnResult.NewVersion -> {
+            is NewVersion -> {
                 "NewUpdate"
             }
-            is ReturnResult.PaymentOverdue -> {
+            is PaymentOverdue -> {
                 "MembershipExpired"
             }
-            is ReturnResult.SessionExpired -> {
+            is SessionExpired -> {
                 "Session expired"
             }
             else -> {

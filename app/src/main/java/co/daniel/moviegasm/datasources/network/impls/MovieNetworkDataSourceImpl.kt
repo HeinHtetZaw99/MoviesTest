@@ -24,18 +24,11 @@ class MovieNetworkDataSourceImpl @Inject constructor(
         val body = movieApi.getMoviesList(apiKey, "en-US", pageNumber).execute().body()!!
         pageNumber++
         lastPageNumber = body.totalPages
-        return if(body.results == null ) arrayListOf() else  body.results.map {
+        return if(body.results == null ) arrayListOf() else body.results.map {
                 moviesMapper.map(it!!)
-        } ?: arrayListOf()
+        }
     }
 
-    override fun getTempToken(): String {
-        TODO("Not yet implemented")
-    }
-
-    override fun getMovieByID(movieID: String): MoviesVO {
-        TODO("Not yet implemented")
-    }
 
     override fun getCurrentPageNumber(): Int {
         return pageNumber

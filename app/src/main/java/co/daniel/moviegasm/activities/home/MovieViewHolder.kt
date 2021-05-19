@@ -16,6 +16,5 @@ class MovieViewHolder(
         binding.moviePosterIv.show(mData.poster)
         binding.movieTitleTv.text = mData.title
         binding.root.setOnClickListener { listener.onClickMovie(mData.id) }
-//        binding.movieRatedTv.text = mData.popularity.toString()
     }
 }

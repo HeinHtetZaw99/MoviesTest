@@ -1,4 +1,4 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

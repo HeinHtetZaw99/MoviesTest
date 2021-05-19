@@ -12,16 +12,17 @@ class FakeMovieNetworkDataSourceImpl @Inject constructor() : MovieNetworkDataSou
 
 
     override fun getMoviesList(): List<MoviesVO?> {
-        return Collections.nCopies(10, MoviesVO("jl2020", 10000000,"Justice League Synder's Cut" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjKiwgVJ_ce_o31yNCrAIp7hMGnpm5XkPMXUxvjv6eNOr9PEOrjB_Bz7xOPx5kpFBO5mg&usqp=CAU","Heroes saved the day"))
+        return Collections.nCopies(
+            10,
+            MoviesVO(
+                "jl2020",
+                10000000,
+                "Justice League Synder's Cut",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjKiwgVJ_ce_o31yNCrAIp7hMGnpm5XkPMXUxvjv6eNOr9PEOrjB_Bz7xOPx5kpFBO5mg&usqp=CAU",
+                "Heroes saved the day"
+            )
+        )
 
-    }
-
-    override fun getTempToken(): String {
-       return "your-fake-token"
-    }
-
-    override fun getMovieByID(movieID: String): MoviesVO {
-        return MoviesVO("jl2020", 10000000,"Justice League Synder's Cut" , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjKiwgVJ_ce_o31yNCrAIp7hMGnpm5XkPMXUxvjv6eNOr9PEOrjB_Bz7xOPx5kpFBO5mg&usqp=CAU","Heroes saved the day")
     }
 
     override fun getCurrentPageNumber(): Int {

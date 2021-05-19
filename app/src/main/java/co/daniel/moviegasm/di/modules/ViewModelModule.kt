@@ -1,6 +1,7 @@
-package co.daniel.moviegasm.di
+package co.daniel.moviegasm.di.modules
 
 import androidx.lifecycle.ViewModel
+import co.daniel.moviegasm.di.ViewModelKey
 import co.daniel.moviegasm.viewmodel.HomeViewModel
 import co.daniel.moviegasm.viewmodel.MovieDetailsViewModel
 import dagger.Binds

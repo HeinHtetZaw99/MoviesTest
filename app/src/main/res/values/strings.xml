@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Moviegasm</string>
+    <string name="btn_msg_ok">Ok</string>
+    <string name="error_msg_no_network">No network connection</string>
+    <string name="error_generic">Unknown error occurred.</string>
+    <string name="pref_access_token">PREF_ACCESS_TOKEN</string>
+    <string name="error_server_404">Access denied.</string>
+    <string name="error_server_500">Internal server error occurred.</string>
+    <string name="error_server_503">Service currently unavailable.</string>
+    <string name="error_no_internet">No internet connection.</string>
+    <string name="error_socket_timeout">Time out.</string>
+</resources>

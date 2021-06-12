@@ -1,9 +1,9 @@
 package co.daniel.moviegasm.di.modules
 
 
-import co.daniel.moviegasm.datasources.MovieCacheDataSource
-import co.daniel.moviegasm.datasources.cache.MovieCacheDataSourceImpl
-import co.daniel.moviegasm.datasources.cache.room.AppDatabase
+import co.daniel.moviegasm.network.datasources.MovieCacheDataSource
+import co.daniel.moviegasm.network.datasources.cache.MovieCacheDataSourceImpl
+import co.daniel.moviegasm.network.datasources.cache.room.AppDatabase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

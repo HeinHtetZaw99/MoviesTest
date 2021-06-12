@@ -102,9 +102,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity(),
     override fun onConfigurationChanged(newConfig: Configuration) {
         // ignore orientation change
         if (newConfig.orientation != currentOrientation) {
-
             super.onConfigurationChanged(newConfig)
-
         }
         currentOrientation = newConfig.orientation
         Log.i("Orientation", "current :: $currentOrientation")

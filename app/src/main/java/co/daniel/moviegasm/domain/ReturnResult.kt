@@ -57,7 +57,7 @@ fun <T> ReturnResult<T>.compare(other: ReturnResult<T>, inTestMode: Boolean = fa
         showInLog(this, other, inTestMode)
         when (this) {
             is ReturnResult.PositiveResult -> {
-                this.data != null && (other as ReturnResult.PositiveResult).data != null && (this as ReturnResult.PositiveResult).data!! == other.data
+                this.data != null && (other as ReturnResult.PositiveResult).data != null && this.data!! == other.data
             }
             is ReturnResult.ErrorResult -> {
                 this.data == (other as ReturnResult.ErrorResult).data && this.errorMsg == other.errorMsg
@@ -77,8 +77,6 @@ private fun <T> showInLog(`this`: ReturnResult<T>, that: ReturnResult<T>, inTest
     if (inTestMode) {
         println("this : ${getReturnResultType(`this`)}")
         println("that : ${getReturnResultType(that)}")
-    } else {
-        //do nothing
     }
 }
 

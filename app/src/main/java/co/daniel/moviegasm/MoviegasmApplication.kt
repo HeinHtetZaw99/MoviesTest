@@ -24,7 +24,6 @@ class MoviegasmApplication : Application(), HasAndroidInjector {
         super.onCreate()
         Timber.plant(LoggingTree())
 
-
         if (applicationComponent == null) {
             applicationComponent = reinitApplicationComponent()
         }

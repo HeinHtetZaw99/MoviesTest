@@ -13,8 +13,8 @@
         android:supportsRtl="true"
 
         android:theme="@style/Theme.Moviegasm">
-        <activity android:name=".activities.details.MovieDetailsActivity"/>
-        <activity android:name=".activities.home.HomeScreenActivity" android:configChanges="orientation" android:screenOrientation="sensor">
+        <activity android:name=".presentation.activities.details.MovieDetailsActivity"/>
+        <activity android:name=".presentation.activities.home.HomeScreenActivity" android:configChanges="orientation" android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

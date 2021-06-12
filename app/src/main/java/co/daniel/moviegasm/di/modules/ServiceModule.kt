@@ -1,6 +1,6 @@
 package co.daniel.moviegasm.di.modules
 
-import co.daniel.moviegasm.datasources.network.services.MoviesAPI
+import co.daniel.moviegasm.network.datasources.network.services.MoviesAPI
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

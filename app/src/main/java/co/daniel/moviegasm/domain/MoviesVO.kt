@@ -22,6 +22,7 @@ data class MoviesVO(
      val popularity: Double = 0.0,
      val voteAverage: Double = 0.0,
      val adult: Boolean = false,
-     val voteCount: Int = 0
+     val voteCount: Int = 0,
+     val pageNumber : Int = 1
 ) {
 }

@@ -2,50 +2,61 @@ package co.daniel.moviegasm.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import co.daniel.moviegasm.domain.MoviesVO
-import co.daniel.moviegasm.domain.ReturnResult
+import co.daniel.moviegasm.domain.interactors.GetMovies
+import co.daniel.moviegasm.domain.interactors.SaveMovies
 import co.daniel.moviegasm.repositories.MovieRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * Created by HeinHtetZaw on 5/19/21.
  */
-class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository) :
+class HomeViewModel @Inject constructor(
+    private val getMovies: GetMovies,
+    private val saveMovies: SaveMovies,
+    private val movieRepository: MovieRepository
+) :
     BaseViewModel() {
 
     var isMessageListAlreadyLoading: Boolean = false
     var hasMoreToLoadMessage: Boolean = true
 
-    fun getMovieListFromNetwork() {
+    fun getMovieListFromNetwork(fetchFromStart: Boolean) {
         isMessageListAlreadyLoading = true
-        movieRepository.getMoviesList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        getMovies.execute(
+            GetMovies.GetMoviesParams(
+                isFromCache = false,
+                fetchFromStart = fetchFromStart
+            )
+        )
             .subscribe({
-                Log.d("Paging","getMovieList from network : $it ")
+                Log.d("HomeViewModel", "getMovieList from network : $it ")
                 hasMoreToLoadMessage = it.isNotEmpty()
                 isMessageListAlreadyLoading = false
                 val listToBeSaved = ArrayList<MoviesVO>()
                 it.forEach { entry ->
-                    if (entry != null)
-                        listToBeSaved.add(entry)
+                    listToBeSaved.add(entry)
                 }
-                movieRepository.saveMovies(listToBeSaved)
 
+                saveMovies(listToBeSaved)
             }, {
                 Timber.e("Error in getMovieList  : $it ")
                 isMessageListAlreadyLoading = false
-
             }).addToCompositeDisposable()
     }
 
-    fun getMoviesListFromCache(fetchFromStart: Boolean): LiveData<List<MoviesVO>> {
-        isMessageListAlreadyLoading = false
-        return movieRepository.getCachedMovies(fetchFromStart)
+    fun saveMovies(listToBeSaved: List<MoviesVO>) {
+        saveMovies.execute(SaveMovies.SaveMoviesParams(listToBeSaved))
+            .subscribe {
+                Log.i("HomeViewModel", "data saved $listToBeSaved")
+            }.addToCompositeDisposable()
+    }
+
+
+    fun getMoviesListFromCache(): LiveData<List<MoviesVO>> {
+//        isMessageListAlreadyLoading = false
+        return movieRepository.getCachedMovies()
     }
 
 }

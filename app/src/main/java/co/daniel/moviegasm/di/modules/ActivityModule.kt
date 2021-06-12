@@ -1,7 +1,7 @@
 package co.daniel.moviegasm.di.modules
 
-import co.daniel.moviegasm.activities.details.MovieDetailsActivity
-import co.daniel.moviegasm.activities.home.HomeScreenActivity
+import co.daniel.moviegasm.presentation.activities.details.MovieDetailsActivity
+import co.daniel.moviegasm.presentation.activities.home.HomeScreenActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

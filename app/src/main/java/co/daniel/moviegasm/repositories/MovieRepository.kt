@@ -9,12 +9,12 @@ import io.reactivex.Observable
  * Created by HeinHtetZaw on 5/19/21.
  */
 interface MovieRepository {
-    fun getMoviesList() : Observable<List<MoviesVO?>>
+    fun getMoviesList(fetchFromStart : Boolean) : Observable<List<MoviesVO>>
 
     fun saveMovieAPIKEY( key : String ) : Completable
     fun getMovieByID(movieID: String): LiveData<MoviesVO>
 
-    fun getCachedMovies(fetchFromStart : Boolean) : LiveData<List<MoviesVO>>
-    fun saveMovies(dataList : List<MoviesVO>)
+    fun getCachedMovies() : LiveData<List<MoviesVO>>
+    fun saveMovies(dataList : List<MoviesVO>) : Completable
 
 }

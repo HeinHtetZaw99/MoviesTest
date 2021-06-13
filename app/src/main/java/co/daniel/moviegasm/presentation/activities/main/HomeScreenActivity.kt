@@ -1,20 +1,25 @@
-package co.daniel.moviegasm.presentation.activities.home
+package co.daniel.moviegasm.presentation.activities.main
 
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import co.daniel.moviegasm.base.BaseActivity
 import co.daniel.moviegasm.databinding.ActivityMainBinding
 import co.daniel.moviegasm.presentation.activities.details.MovieDetailsActivity
+import co.daniel.moviegasm.presentation.activities.home.MovieListAdapter
+import co.daniel.moviegasm.presentation.activities.home.MovieListAdapterEventListener
 import co.daniel.moviegasm.presentation.utils.addCustomScrollListener
 import co.daniel.moviegasm.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventListener {
 
     private val TAG = "HOMESCREEN_ACTIVITY"
     private lateinit var binding: ActivityMainBinding
-    override val viewModel: HomeViewModel by contractedViewModels()
+    override val viewModel: HomeViewModel by viewModels()
     private val movieAdapter = MovieListAdapter(this@HomeScreenActivity, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {

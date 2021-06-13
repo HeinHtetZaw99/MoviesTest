@@ -1,7 +1,7 @@
 package co.daniel.moviegasm.network.datasources.network.dummy
 
-import co.daniel.moviegasm.network.datasources.network.MovieNetworkDataSource
 import co.daniel.moviegasm.domain.MoviesVO
+import co.daniel.moviegasm.network.datasources.network.MovieNetworkDataSource
 import java.util.*
 import javax.inject.Inject
 

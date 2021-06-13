@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import co.daniel.moviegasm.base.BaseRecyclerAdapter
 import co.daniel.moviegasm.databinding.ItemMovieListBinding
 import co.daniel.moviegasm.domain.MoviesVO
+import co.daniel.moviegasm.presentation.activities.main.MovieViewHolder
 
 /**
  * Created by HeinHtetZaw on 5/19/21.

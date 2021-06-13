@@ -3,6 +3,10 @@ package co.daniel.moviegasm.repositories.impl
 import androidx.lifecycle.LiveData
 import co.daniel.moviegasm.di.PostExecutionThread
 import co.daniel.moviegasm.di.ThreadExecutor
+import co.daniel.moviegasm.di.modules.MovieCacheDataSourceTag
+import co.daniel.moviegasm.di.modules.MovieNetworkDataSourceTag
+import co.daniel.moviegasm.di.modules.PostExecutionThreadTag
+import co.daniel.moviegasm.di.modules.ThreadExecutorTag
 import co.daniel.moviegasm.domain.MoviesVO
 import co.daniel.moviegasm.network.datasources.MovieCacheDataSource
 import co.daniel.moviegasm.network.datasources.network.MovieNetworkDataSource
@@ -17,10 +21,10 @@ import javax.inject.Inject
  * Created by HeinHtetZaw on 5/19/21.
  */
 class MovieRepositoryImpl @Inject constructor(
-    private val movieNetworkDataSource: MovieNetworkDataSource,
-    private val movieCacheDataSource: MovieCacheDataSource,
-    private val threadExecutor: ThreadExecutor,
-    private val postExecutionThread: PostExecutionThread
+    @MovieNetworkDataSourceTag private val movieNetworkDataSource: MovieNetworkDataSource,
+    @MovieCacheDataSourceTag private val movieCacheDataSource: MovieCacheDataSource,
+    @ThreadExecutorTag private val threadExecutor: ThreadExecutor,
+    @PostExecutionThreadTag private val postExecutionThread: PostExecutionThread
 ) : MovieRepository {
 
     val moviesListItems = BehaviorSubject.create<List<MoviesVO>>()
@@ -28,9 +32,11 @@ class MovieRepositoryImpl @Inject constructor(
 
     private var cachePageNumber = 1
 
-    override fun getMoviesList(fetchFromStart : Boolean): Observable<List<MoviesVO>> {
+    override fun getMoviesList(fetchFromStart: Boolean): Observable<List<MoviesVO>> {
 
-        return Observable.fromCallable { movieNetworkDataSource.getMoviesList(fetchFromStart).filterNotNull() }
+        return Observable.fromCallable {
+            movieNetworkDataSource.getMoviesList(fetchFromStart).filterNotNull()
+        }
         /* Observable.fromCallable { movieNetworkDataSource.getMoviesList().filterNotNull() }
              .subscribeOn(Schedulers.from(threadExecutor)).observeOn(
                  postExecutionThread.scheduler

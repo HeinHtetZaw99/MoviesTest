@@ -1,39 +1,60 @@
 package co.daniel.moviegasm.di.modules
 
-import android.app.Application
-import android.content.Context
+
+import co.daniel.moviegasm.di.GenericErrorMessageFactory
+import co.daniel.moviegasm.di.JobExecutor
+import co.daniel.moviegasm.di.UIThread
+import co.daniel.moviegasm.network.datasources.cache.MovieCacheDataSourceImpl
+import co.daniel.moviegasm.network.datasources.network.MovieNetworkDataSource
 import co.daniel.moviegasm.network.datasources.network.exception.NetworkExceptionMessageFactory
+import co.daniel.moviegasm.network.datasources.network.impls.MovieNetworkDataSourceImpl
 import co.daniel.moviegasm.network.datasources.network.impls.helpers.GenericErrorMessageFactoryImpl
 import co.daniel.moviegasm.network.datasources.network.impls.helpers.NetworkExceptionMessageFactoryImpl
-import co.daniel.moviegasm.di.*
-
+import co.daniel.moviegasm.repositories.impl.MovieRepositoryImpl
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module(includes = [BaseAppModule.Provider::class, ViewModelFactoryModule::class, RepositoryModule::class])
-abstract class BaseAppModule {
+@InstallIn(SingletonComponent::class)
+@Module
+interface BaseAppModule {
 
     @Binds
-    abstract fun threadExecutor(jobExecutor: JobExecutor): ThreadExecutor
+    @ThreadExecutorTag
+    fun threadExecutor(jobExecutor: JobExecutor): co.daniel.moviegasm.di.ThreadExecutor
 
     @Binds
-    abstract fun postExecutionThread(uiThread: UIThread): PostExecutionThread
+    @PostExecutionThreadTag
+    fun postExecutionThread(uiThread: UIThread): co.daniel.moviegasm.di.PostExecutionThread
 
     @Binds
-    abstract fun genericErrorMessageFactory(genericErrorMessageFactory: GenericErrorMessageFactoryImpl): GenericErrorMessageFactory
+    @GenericErrorMessageFactoryTag
+    fun genericErrorMessageFactory(genericErrorMessageFactory: GenericErrorMessageFactoryImpl): GenericErrorMessageFactory
 
     @Binds
-    abstract fun networkErrorMessageFactory(networkExceptionMessageFactory: NetworkExceptionMessageFactoryImpl): NetworkExceptionMessageFactory
+    @NetworkErrorMessageFactoryTag
+    fun networkErrorMessageFactory(networkExceptionMessageFactory: NetworkExceptionMessageFactoryImpl): NetworkExceptionMessageFactory
 
-    @Module
-    object Provider {
-        @Provides
-        @JvmStatic
-        @Singleton
-        fun providesContext(application: Application): Context = application.applicationContext!!
+    @Binds
+    @MovieRepositoryTag
+    fun getMovieRepository(
+        homeRepositoryImpl: MovieRepositoryImpl
+    ): co.daniel.moviegasm.repositories.MovieRepository
 
-    }
+
+    @Binds
+    @MovieNetworkDataSourceTag
+    fun homeDataSource(
+        homeDataSourceImpl: MovieNetworkDataSourceImpl
+    ): MovieNetworkDataSource
+
+    @Binds
+    @MovieCacheDataSourceTag
+    fun movieCacheSource(
+        movieCacheDataSourceImpl: MovieCacheDataSourceImpl
+    ): co.daniel.moviegasm.network.datasources.MovieCacheDataSource
+
 
 }

@@ -3,6 +3,7 @@ package co.daniel.moviegasm.viewmodel
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import co.daniel.moviegasm.di.GenericErrorMessageFactory
+import co.daniel.moviegasm.di.modules.GenericErrorMessageFactoryTag
 import co.daniel.moviegasm.domain.ReturnResult
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -19,12 +20,13 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     @Inject
+    @GenericErrorMessageFactoryTag
     lateinit var genericErrorMessageFactory: GenericErrorMessageFactory
 
     fun Disposable.addToCompositeDisposable(): Disposable = apply { compositeDisposable.add(this) }
 
-    fun <T> Throwable.convertToErrorResult(@StringRes defaultString : Int = 0) : ReturnResult<T> {
-        return genericErrorMessageFactory.getError(this , defaultString)
+    fun <T> Throwable.convertToErrorResult(@StringRes defaultString: Int = 0): ReturnResult<T> {
+        return genericErrorMessageFactory.getError(this, defaultString)
     }
 
 }

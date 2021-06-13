@@ -13,12 +13,12 @@ import javax.inject.Singleton
 class UIThread @Inject constructor() : PostExecutionThread {
 
     override val scheduler: Scheduler
-        get() = {
+        get() {
             val asyncMainThreadScheduler = AndroidSchedulers.from(Looper.getMainLooper(), true)
             RxAndroidPlugins.setInitMainThreadSchedulerHandler {
                 asyncMainThreadScheduler
             }
-            AndroidSchedulers.mainThread()
-        }.invoke()
+            return AndroidSchedulers.mainThread()
+        }
 
 }

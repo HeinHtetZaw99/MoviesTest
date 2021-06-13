@@ -5,6 +5,7 @@ import co.daniel.moviegasm.R
 
 import co.daniel.moviegasm.network.datasources.network.exception.NetworkException
 import co.daniel.moviegasm.network.datasources.network.exception.NetworkExceptionMessageFactory
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.ResponseBody
 import timber.log.Timber
 import java.net.ConnectException
@@ -13,7 +14,7 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class NetworkExceptionMessageFactoryImpl @Inject constructor(
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) : NetworkExceptionMessageFactory {
 
     override fun getErrorMessage(networkException: NetworkException): CharSequence {

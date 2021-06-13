@@ -2,18 +2,20 @@ package co.daniel.moviegasm.network.datasources.network.impls.helpers
 
 import android.content.Context
 import co.daniel.moviegasm.R
+import co.daniel.moviegasm.di.GenericErrorMessageFactory
+import co.daniel.moviegasm.di.modules.NetworkErrorMessageFactoryTag
+import co.daniel.moviegasm.domain.ReturnResult
 import co.daniel.moviegasm.network.datasources.network.exception.NetworkException
 import co.daniel.moviegasm.network.datasources.network.exception.NetworkExceptionMessageFactory
-import co.daniel.moviegasm.di.GenericErrorMessageFactory
-import co.daniel.moviegasm.domain.ReturnResult
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
 class GenericErrorMessageFactoryImpl @Inject constructor(
-    private val context: Context,
-    private val networkExceptionMessageFactory: NetworkExceptionMessageFactory
+    @ApplicationContext private val context: Context,
+    @NetworkErrorMessageFactoryTag private val networkExceptionMessageFactory: NetworkExceptionMessageFactory
 ) : GenericErrorMessageFactory {
     override fun getErrorMessage(throwable: Throwable): CharSequence {
         return getErrorMessage(throwable, 0)

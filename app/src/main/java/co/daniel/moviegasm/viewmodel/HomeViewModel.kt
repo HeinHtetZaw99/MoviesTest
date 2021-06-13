@@ -2,20 +2,23 @@ package co.daniel.moviegasm.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import co.daniel.moviegasm.di.modules.MovieRepositoryTag
 import co.daniel.moviegasm.domain.MoviesVO
 import co.daniel.moviegasm.domain.interactors.GetMovies
 import co.daniel.moviegasm.domain.interactors.SaveMovies
 import co.daniel.moviegasm.repositories.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * Created by HeinHtetZaw on 5/19/21.
  */
+@HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getMovies: GetMovies,
     private val saveMovies: SaveMovies,
-    private val movieRepository: MovieRepository
+    @MovieRepositoryTag private val movieRepository: MovieRepository
 ) :
     BaseViewModel() {
 

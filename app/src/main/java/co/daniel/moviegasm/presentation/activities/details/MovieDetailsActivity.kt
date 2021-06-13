@@ -3,6 +3,7 @@ package co.daniel.moviegasm.presentation.activities.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import co.daniel.moviegasm.R
 import co.daniel.moviegasm.addBackNavButton
 import co.daniel.moviegasm.base.BaseActivity
@@ -10,13 +11,16 @@ import co.daniel.moviegasm.databinding.ActivityMovieDetailsBinding
 import co.daniel.moviegasm.domain.MoviesVO
 import co.daniel.moviegasm.show
 import co.daniel.moviegasm.viewmodel.MovieDetailsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MovieDetailsActivity : BaseActivity<MovieDetailsViewModel>() {
 
     private var movieID: String = ""
     private lateinit var binding: ActivityMovieDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -24,7 +28,7 @@ class MovieDetailsActivity : BaseActivity<MovieDetailsViewModel>() {
         initUI()
     }
 
-    override val viewModel: MovieDetailsViewModel by contractedViewModels()
+    override val viewModel: MovieDetailsViewModel by viewModels()
 
     override fun loadData() {
 

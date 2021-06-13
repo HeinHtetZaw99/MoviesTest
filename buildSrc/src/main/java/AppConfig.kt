@@ -12,15 +12,14 @@ object AppConfig {
     const val proguardConsumerRules = "consumer-rules.pro"
     const val dimension = "environment"
 
+    private const val versionMajor = 1
+    private const val versionMinor = 0
+    private const val versionPatch = 0
+    private const val rebuildNumber = 0
 
-    private val versionMajor = 1
-    private val versionMinor = 0
-    private val versionPatch = 0
-    private val rebuildNumber = 0
-
-    val versionCode =
+    const val versionCode =
         versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + rebuildNumber * 10
-    val versionName = "$versionMajor.$versionMinor.$versionPatch"
+    const val versionName = "$versionMajor.$versionMinor.$versionPatch"
 }
 
 object Versions {
@@ -29,12 +28,12 @@ object Versions {
     const val kotlin = "1.4.32"
 
     //libs
-    val coreKtx = "1.2.0"
-    val appcompat = "1.3.0-alpha01"
-    val constraintLayout = "2.0.0-beta8"
+    const val coreKtx = "1.2.0"
+    const val appcompat = "1.3.0-alpha01"
+    const val constraintLayout = "2.0.0-beta8"
 
     //test
-    val junit = "4.12"
-    val extJunit = "1.1.1"
-    val espresso = "3.2.0"
+    const val junit = "4.12"
+    const val extJunit = "1.1.1"
+    const val espresso = "3.2.0"
 }

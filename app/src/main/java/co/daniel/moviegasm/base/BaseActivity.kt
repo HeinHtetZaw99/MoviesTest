@@ -7,32 +7,22 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import co.daniel.moviegasm.di.GenericErrorMessageFactory
+import co.daniel.moviegasm.di.modules.GenericErrorMessageFactoryTag
 import co.daniel.moviegasm.viewmodel.BaseViewModel
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 
-abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity(),
-    HasAndroidInjector {
+abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    @Inject
+    @GenericErrorMessageFactoryTag
     lateinit var genericErrorMessageFactory: GenericErrorMessageFactory
 
     protected abstract val viewModel: VM
@@ -46,36 +36,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    }
-
-    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
-
-    /**
-     * Helper function for easily init of viewModel
-     */
-    inline fun <reified VM : BaseViewModel> contractedViewModels(): Lazy<VM> =
-        ViewModelLazy(VM::class)
-
-
-    inner class ViewModelLazy<VM : ViewModel>(
-        private val viewModelClass: KClass<VM>
-    ) : Lazy<VM> {
-        private var cached: VM? = null
-
-        override val value: VM
-            get() {
-                var viewModel = cached
-                if (viewModel == null) {
-                    viewModel = ViewModelProvider(
-                        this@BaseActivity,
-                        viewModelFactory
-                    ).get(viewModelClass.java)
-                    cached = viewModel
-                }
-                return viewModel
-            }
-
-        override fun isInitialized() = cached != null
     }
 
     fun createView(@LayoutRes layout: Int) = LayoutInflater.from(this).inflate(layout, null)!!

@@ -1,8 +1,9 @@
-package co.daniel.moviegasm.presentation.activities.home
+package co.daniel.moviegasm.presentation.activities.main
 
 import co.daniel.moviegasm.base.BaseViewHolder
 import co.daniel.moviegasm.databinding.ItemMovieListBinding
 import co.daniel.moviegasm.domain.MoviesVO
+import co.daniel.moviegasm.presentation.activities.home.MovieListAdapterEventListener
 import co.daniel.moviegasm.show
 
 /**

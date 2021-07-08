@@ -13,6 +13,7 @@ import co.daniel.moviegasm.presentation.activities.home.MovieListAdapterEventLis
 import co.daniel.moviegasm.presentation.utils.addCustomScrollListener
 import co.daniel.moviegasm.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventListener {
@@ -24,6 +25,7 @@ class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.d("OnCreate Reached")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
@@ -77,4 +79,7 @@ class HomeScreenActivity : BaseActivity<HomeViewModel>(), MovieListAdapterEventL
     override fun onClickMovie(movieID: String) {
         startActivity(MovieDetailsActivity.start(this, movieID))
     }
+
+    // life cycle test
+
 }

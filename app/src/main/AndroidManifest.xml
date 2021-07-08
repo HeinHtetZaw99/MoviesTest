@@ -14,15 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moviegasm">
         <activity android:name=".presentation.activities.details.MovieDetailsActivity" />
-        <activity
-            android:name=".presentation.activities.main.HomeScreenActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="sensor">
+        <activity android:name=".presentation.activities.details.compose.MovieDetailsComposeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.activities.main.HomeScreenActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="sensor">
+
         </activity>
     </application>
 
